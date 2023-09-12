@@ -38,7 +38,7 @@ utilyEjAnteriores_y1 = float(input('Utilidades ejercicios anteriores: '))
 ventas_y1 = float(input('Ventas: '))
 
 # Se hacen los calculos de ER
-utilyBruta_y1 = costoVentas_y1 - ventas_y1
+utilyBruta_y1 = ventas_y1 -  costoVentas_y1
 resIntegral_y1 = gastosFinancieros_y1 - prodFinancieros_y1
 totalGastosOpe_y1 = gastosVentas_y1 + gastosAdmon_y1 + gastosDespr_y1 + resIntegral_y1
 utilyOperativa_y1 = utilyBruta_y1 - totalGastosOpe_y1
@@ -82,22 +82,22 @@ t_er.add_row("", "Utilidad Bruta", "", "", f"${utilyBruta_y1}")
 t_er.add_row("Gastos de Venta", "", "", f"${gastosVentas_y1}", "")
 t_er.add_row("Gastos de Administración", "", "", f"${gastosAdmon_y1}", "")
 t_er.add_row("Gastos por Despreciación", "", "", f"${gastosDespr_y1}", "")
-t_er.add_row("Gastos Financieros", "", f"{gastosFinancieros_y1}", "", "")
-t_er.add_row("Productos Financieros", "", f"{prodFinancieros_y1}", "", "")
-t_er.add_row("", "Resultado Integral de Financiamiento", "", f"${gastosVentas_y1}", "")
-t_er.add_row("", "Total de Gastos Operativos", "", "", f"{totalGastosOpe_y1}")
-t_er.add_row("", "Utilidad Operativa", "", "", f"{utilyOperativa_y1}")
+t_er.add_row("Gastos Financieros", "", f"${gastosFinancieros_y1}", "", "")
+t_er.add_row("Productos Financieros", "", f"${prodFinancieros_y1}", "", "")
+t_er.add_row("", "Resultado Integral de Financiamiento", "", f"${resIntegral_y1}", "")
+t_er.add_row("", "Total de Gastos Operativos", "", "", f"${totalGastosOpe_y1}")
+t_er.add_row("", "Utilidad Operativa", "", "", f"${utilyOperativa_y1}")
 
 t_er.add_row("Otros Gastos", "", "", f"${otrosGastos_y1}", "")
 t_er.add_row("Otros Productos", "", "", f"${otrosProductos_y1}", "")
-t_er.add_row("", "Total de Otros Gastos y Productos", "", "", f"{totalOtrosGastos_y1}")
-t_er.add_row("", "Utilidad antes de impuestos", "", "", f"{utilyAntesTax_y1}")
+t_er.add_row("", "Total de Otros Gastos y Productos", "", "", f"${totalOtrosGastos_y1}")
+t_er.add_row("", "Utilidad antes de impuestos", "", "", f"${utilyAntesTax_y1}")
 
-t_er.add_row("ISR", "30%", "", f"{isr_y1}", "")
-t_er.add_row("PTU", "10%", "", f"{ptu_y1}", "")
+t_er.add_row("ISR", "30%", "", f"${isr_y1}", "")
+t_er.add_row("PTU", "10%", "", f"${ptu_y1}", "")
 
-t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"{totalTaxPagar_y1}")
-t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"{utilyNetaEj_y1}")
+t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"${totalTaxPagar_y1}")
+t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"${utilyNetaEj_y1}")
 # Impresión de Consola
 
 console = Console()
