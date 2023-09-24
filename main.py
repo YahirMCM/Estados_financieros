@@ -178,3 +178,23 @@ while True:
             break
     elif main_menu == 3:
         break
+
+#**CAPITAL DE TRABAJO**
+#**(EDITAR DESPUES, ESTO ES UN BORRADOR DEL CODIGO FINAL, SIN USAR LA ESTRUCTURA DE TABLE Y ROWS)**
+
+#print(f"Activo Circulante 2014: ${totalAC_y1}")
+#print(f"Activo Circulante 2015: ${totalAC_y2}")
+#print("")
+#print(f"Pasivo Corto Plazo 2014: ${totalPC_y1}")
+#print(f"Pasivo Corto Plazo 2015: ${totalPC_y2}")
+#print("")
+#capTN_y1 = (totalAC_y1 - totalPC_y1)
+#capTN_y2 = (totalAC_y2 - totalPC_y2)
+#print(f"Capital de Trabajo Neto 2014: {capTN_y1}")
+#print(f"Capital de Trabajo Neto 2015: {capTN_y2}")
+#print("")
+#razonCirc_y1 = (totalAC_y1 / totalPC_y1)
+#razonCirc_y2 = (totalAC_y2 / totalPC_y2)
+#print("")
+#print(f"Razon Circulante 2014: ${razonCirc_y1:.2f}")
+#print(f"Razon Circulante 2015: ${razonCirc_y2:.2f}")
