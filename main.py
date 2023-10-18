@@ -1,5 +1,37 @@
 from rich.table import Table
 from rich.console import Console
+import pandas as pd
+
+datos_year1 = {
+    'Cuentas': ['acreedores', 'aport_futuros', 'capital_social', 
+    'costo_ventas','cuentas_cobrar', 'cuentas_pagar', ' despr_acum', 'docx_pagar',
+    'efectivo','eq_computo','eq_transporte','gastos_admin','gastos_ventas','gastos_financieros',
+    'gastos_depre','gastos_preoperativos','hipotecas_pagar','taxes','inv','invest','maq_equipo',
+    'mob_accesorios','otros_gastos','otros_productos','prod_financieros','reserva_legal','terry_edificios',
+    'utily_ej_anteriores','ventas'],
+
+    'Cantidad': [65.00, 535.00, 460.00, 2610.00, 629.00, 478.00, 2291.00, 99.00, 454.00, 123.00, 344.00, 243.00,
+    125.00, 116.00, 299.00, 138.00, 1279.00, 134.00, 361.00, 85.00, 1750.00, 448.00, 44.00, 10.00, 5.00, 30.00,
+    2590.00, 1130.00, 3843.00]
+}
+
+cuentas_year1 = pd.DataFrame(datos_year1)
+
+datos_year2 = {
+    'Cuentas': ['acreedores', 'aport_futuros', 'capital_social', 
+    'costo_ventas','cuentas_cobrar', 'cuentas_pagar', ' despr_acum', 'docx_pagar',
+    'efectivo','eq_computo','eq_transporte','gastos_admin','gastos_ventas','gastos_financieros',
+    'gastos_depre','gastos_preoperativos','hipotecas_pagar','taxes','inv','invest','maq_equipo',
+    'mob_accesorios','otros_gastos','otros_productos','prod_financieros','reserva_legal','terry_edificios',
+    'utily_ej_anteriores','ventas'],
+
+    'Cantidad': [50.00, 545.00, 460.00, 2139.00, 456.00, 338.00, 2570.00, 124.00, 393.00, 120.00, 393.00,
+    234.00, 135.00, 114.00, 279.00, 138.00, 1209.00, 93.00, 375.00, 64.00, 2110.00, 395.00, 44.00, 45.00,
+    10.00, 35.00, 2379.00, 1080.00, 3209.00]
+}
+
+cuentas_year2 = pd.DataFrame(datos_year2)
+
 
 print('¡Bienvenido/a al uso de este programa de estados financieros!\nFavor de ingresar los siguientes datos requeridos:\n\n')
 
