@@ -230,3 +230,42 @@ while True:
 #print("")
 #print(f"Razon Circulante 2014: ${razonCirc_y1:.2f}")
 #print(f"Razon Circulante 2015: ${razonCirc_y2:.2f}")
+
+#**CICLO DE CONVERSION DE EFECTIVO**
+#**(EDITAR DESPUES, ESTO ES UN BORRADOR DEL CODIGO FINAL, SIN USAR LA ESTRUCTURA DE TABLE Y ROWS)**
+
+#Rotacion_Inventario_y1=(costoVentas_y1/inventario_y1)
+#Rotacion_Inventario_y2=(costoVentas_y2/inventario_y2)
+#Rotacion_CXC_y1=(ventas_y1/cuentasCobrar_y1)
+#Rotacion_CXC_y2=(ventas_y2/cuentasCobrar_y2)
+#Rotacion_CXP_y1=(costoVentas_y1/cuentasPagar_y1)
+#Rotacion_CXP_y2=(costoVentas_y2/cuentasPagar_y2)
+#print(f"Rotacion de Inventario Año 1: {Rotacion_Inventario_y1}")
+#print(f"Rotacion de Inventario Año 2: {Rotacion_Inventario_y2}")
+#print(f"Rotacion de CXC Año 1: {Rotacion_CXC_y1}")
+#print(f"Rotacion de CXC Año 2: {Rotacion_CXC_y2}")
+#print(f"Rotacion de CXP Año 1: {Rotacion_CXP_y1}")
+#print(f"Rotacion de CXP Año 2: {Rotacion_CXP_y2}")
+
+#Edad_Promedio_Inventario_y1=(360/Rotacion_Inventario_y1)
+#Edad_Promedio_Inventario_y2=(360/Rotacion_Inventario_y2)
+#Periodo_Promedio_Cobro_y1=(360/Rotacion_CXC_y1)
+#Periodo_Promedio_Cobro_y2=(360/Rotacion_CXC_y2)
+#Ciclo_Operativo_y1=(Edad_Promedio_Inventario_y1+Periodo_Promedio_Cobro_y1)
+#Ciclo_Operativo_y2=(Edad_Promedio_Inventario_y2+Periodo_Promedio_Cobro_y2)
+#print(f"Edad Promedio de Inventario Año 1: {Edad_Promedio_Inventario_y1}")
+#print(f"Edad Promedio de Inventario Año 2: {Edad_Promedio_Inventario_y2}")
+#print(f"Periodo Promedio de Cobro Año 1: {Periodo_Promedio_Cobro_y1}")
+#print(f"Periodo Promedio de Cobro Año 2: {Periodo_Promedio_Cobro_y2}")
+#print(f"Ciclo Operativo Año 1: {Ciclo_Operativo_y1}")
+#print(f"Ciclo Operativo Año 2: {Ciclo_Operativo_y2}")
+
+#Periodo_Promedio_Pago_y1=(360/Rotacion_CXP_y1)
+#Periodo_Promedio_Pago_y2=(360/Rotacion_CXP_y2)
+#print(f"Periodo Promedio de Pago Año 1: {Periodo_Promedio_Pago_y1}")
+#print(f"Periodo Promedio de Pago Año 2: {Periodo_Promedio_Pago_y2}")
+
+#Ciclo_Conv_Efectivo_y1=(Ciclo_Operativo_y1-Periodo_Promedio_Pago_y1)
+#Ciclo_Conv_Efectivo_y2=(Ciclo_Operativo_y2-Periodo_Promedio_Pago_y2)
+#print(f"Ciclo de Conversion de Efectivo Año 1: {Ciclo_Conv_Efectivo_y1}")
+#print(f"Ciclo de Conversion de Efectivo Año 2: {Ciclo_Conv_Efectivo_y2}")
