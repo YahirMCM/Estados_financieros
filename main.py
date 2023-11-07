@@ -2,193 +2,210 @@ from rich.table import Table
 from rich.console import Console
 import pandas as pd
 
-datos_year1 = {
-    'Cuentas': ['acreedores', 'aport_futuros', 'capital_social', 
-    'costo_ventas','cuentas_cobrar', 'cuentas_pagar', ' despr_acum', 'docx_pagar',
-    'efectivo','eq_computo','eq_transporte','gastos_admin','gastos_ventas','gastos_financieros',
-    'gastos_depre','gastos_preoperativos','hipotecas_pagar','taxes','inv','invest','maq_equipo',
-    'mob_accesorios','otros_gastos','otros_productos','prod_financieros','reserva_legal','terry_edificios',
-    'utily_ej_anteriores','ventas'],
+cuentas = {
+        'year':[2014, 2015],
+        'acreedores':[65.00, 50.00],
+        'aportFuturos':[535.00, 545.00],
+        'capitalSocial':[460.00, 460.00],
+        'costoVentas':[2610.00, 2139.00],
+        'cuentasCobrar':[629.00, 456.00],
+        'cuentasPagar':[478.00, 338.00],
+        'desprAcum':[2291.00, 2570.00],
+        'docxPagar':[99.00, 124.00],
+        'efectivo':[454.00, 393.00],
+        'eqComputo':[123.00, 120.00],
+        'eqTransportes':[344.00, 393.00],
+        'gastosAdmin':[243.00, 234.00],
+        'gastosVentas':[125.00, 135.00],
+        'gastosFinancieros':[116.00, 114.00],
+        'gastosDepre':[299.00, 279.00],
+        'gastosPreop':[138.00, 138.00],
+        'hipotecasPagarLP':[1279.00, 1209.00],
+        'taxes':[134.00, 93.00],
+        'inv':[361.00, 375.00],
+        'invest':[85.00, 64.00],
+        'maqEquipo':[1750.00, 2110.00],
+        'mobAccesorios':[448.00, 395.00],
+        'otrosGastos':[44.00, 44.00],
+        'otrosProductos':[10.00, 45.00],
+        'prodFinancieros':[5.00, 10.00],
+        'reservaLegal':[30.00, 35.00],
+        'terryEdificios':[2590.00, 2379.00],
+        'utilyEjAnteriores':[1130.00, 1080.00],
+        'ventas':[3843.00, 3209.00]
+        }
 
-    'Cantidad': [65.00, 535.00, 460.00, 2610.00, 629.00, 478.00, 2291.00, 99.00, 454.00, 123.00, 344.00, 243.00,
-    125.00, 116.00, 299.00, 138.00, 1279.00, 134.00, 361.00, 85.00, 1750.00, 448.00, 44.00, 10.00, 5.00, 30.00,
-    2590.00, 1130.00, 3843.00]
-}
-
-cuentas_year1 = pd.DataFrame(datos_year1)
-
-datos_year2 = {
-    'Cuentas': ['acreedores', 'aport_futuros', 'capital_social', 
-    'costo_ventas','cuentas_cobrar', 'cuentas_pagar', ' despr_acum', 'docx_pagar',
-    'efectivo','eq_computo','eq_transporte','gastos_admin','gastos_ventas','gastos_financieros',
-    'gastos_depre','gastos_preoperativos','hipotecas_pagar','taxes','inv','invest','maq_equipo',
-    'mob_accesorios','otros_gastos','otros_productos','prod_financieros','reserva_legal','terry_edificios',
-    'utily_ej_anteriores','ventas'],
-
-    'Cantidad': [50.00, 545.00, 460.00, 2139.00, 456.00, 338.00, 2570.00, 124.00, 393.00, 120.00, 393.00,
-    234.00, 135.00, 114.00, 279.00, 138.00, 1209.00, 93.00, 375.00, 64.00, 2110.00, 395.00, 44.00, 45.00,
-    10.00, 35.00, 2379.00, 1080.00, 3209.00]
-}
-
-cuentas_year2 = pd.DataFrame(datos_year2)
-
+cuentas = pd.DataFrame(cuentas)
+cuentas.set_index('year', inplace=True)
 
 print('¡Bienvenido/a al uso de este programa de estados financieros!\nFavor de ingresar los siguientes datos requeridos:\n\n')
-
-y1 = input('Ingrese el año del cual se registrarán los datos: ')
-
+# ELECCION DE SI QUIERE AñADIR DATOS O PREFIERE USAR LOS QUE YA TIENE
 while True:
-    # Se solicitan los datos
-    try:
-        acreedores_y1 = float(input('\nAcreedores diversos: '))
-        aportFuturos_y1 = float(input('Aportaciones para futuros aumentos de capital'))
-        capitalSocial_y1 = float(input('Capital Social'))
-        costoVentas_y1 = float(input('Costo de Ventas: '))
-        cuentasCobrar_y1 = float(input('Cuentas por Cobrar: '))
-        cuentasPagar_y1 = float(input('Cuentas por Pagar: '))
-        desprAcum_y1 = float(input('Despreciación acumulada de Activos Fijo: '))
-        docxPagar_y1 = float(input('Documentos por pagar: '))
-        efectivo_y1 = float(input('Efectivo: '))
-        eqComputo_y1 = float(input('Equipo de computo: '))
-        eqTransportes_y1 = float(input('Equipo de Transportes: '))
-        gastosAdmon_y1 = float(input('Gastos de administración: '))
-        gastosVentas_y1 = float(input('Gastos de ventas: '))
-        gastosFinancieros_y1 = float(input('Gastos Financieros: '))
-        gastosDespr_y1 = float(input('Gastos por depreciación: '))
-        gastosPreop_y1 = float(input('Gastos preoperativos: '))
-        hipotecasPagarLP_y1 = float(input('Hipotecas por pagar largo plazo: '))
-        taxes_y1 = float(input('Impuestos: '))
-        inv_y1 = float(input('Inventarios: '))
-        invest_y1 = float(input('Inversiones: '))
-        maqEquipo_y1 = float(input('Maquinaria y equipo: '))
-        mobAccesorios_y1 = float(input('Mobiliario y accesorios: '))
-        otrosGastos_y1 = float(input('Otros Gastos: '))
-        otrosProductos_y1 = float(input('Otros Productos: '))
-        prodFinancieros_y1 = float(input('Productos Financieros: '))
-        reservaLegal_y1 = float(input('Reserva Legal: '))
-        terryEdificios_y1 = float(input('Terreno y edificios: '))
-        utilyEjAnteriores_y1 = float(input('Utilidades ejercicios anteriores: '))
-        ventas_y1 = float(input('Ventas: '))
-    except:
-        print('ERROR: INGRESE UN VALOR MONETARIO')
-    else:
+    print("Desea agregar datos?")
+    print("1- SI")
+    print("2- NO")
+    agregar_datos = int(input("Seleccione el numero para la opcion:\n"))
+
+    if agregar_datos == 1:
+        # Se solicitan los datos
+            try:
+                año = int(input("Escribe el año de los datos a registrar:"))
+                acreedores = float(input('\nAcreedores diversos: '))
+                aportFuturos = float(input('Aportaciones para futuros aumentos de capital'))
+                capitalSocial = float(input('Capital Social'))
+                costoVentas = float(input('Costo de Ventas: '))
+                cuentasCobrar = float(input('Cuentas por Cobrar: '))
+                cuentasPagar = float(input('Cuentas por Pagar: '))           
+                desprAcum = float(input('Despreciación acumulada de Activos Fijo: ')) 
+                docxPagar = float(input('Documentos por pagar: '))
+                efectivo = float(input('Efectivo: '))
+                eqComputo = float(input('Equipo de computo: '))
+                eqTransportes = float(input('Equipo de Transportes: '))
+                gastosAdmon = float(input('Gastos de administración: '))
+                gastosVentas = float(input('Gastos de ventas: '))
+                gastosFinancieros = float(input('Gastos Financieros: '))
+                gastosDespr = float(input('Gastos por depreciación: '))
+                gastosPreop = float(input('Gastos preoperativos: '))
+                hipotecasPagarLP = float(input('Hipotecas por pagar largo plazo: '))
+                taxes = float(input('Impuestos: '))
+                inv = float(input('Inventarios: '))
+                invest = float(input('Inversiones: '))
+                maqEquipo = float(input('Maquinaria y equipo: '))
+                mobAccesorios = float(input('Mobiliario y accesorios: '))
+                otrosGastos = float(input('Otros Gastos: '))
+                otrosProductos = float(input('Otros Productos: '))
+                prodFinancieros = float(input('Productos Financieros: '))
+                reservaLegal = float(input('Reserva Legal: '))
+                terryEdificios = float(input('Terreno y edificios: '))
+                utilyEjAnteriores = float(input('Utilidades ejercicios anteriores: '))
+                ventas = float(input('Ventas: '))
+            except:
+                print('ERROR: INGRESE UN VALOR MONETARIO')
+    #-----------------------------------------------------------------------------------------------
+            new_year = {
+            'year':[año],
+            'acreedores':[acreedores],
+            'aportFuturos':[aportFuturos],            
+            'capitalSocial':[capitalSocial],
+            'costoVentas':[costoVentas],
+            'cuentasCobrar':[cuentasCobrar],                        
+            'cuentasPagar':[cuentasPagar],
+            'desprAcum':[desprAcum],
+            'docxPagar':[docxPagar],                        
+            'efectivo':[efectivo],
+            'eqComputo':[eqComputo],
+            'eqTransportes':[eqTransportes],                        
+            'gastosAdmin':[gastosAdmon],
+            'gastosVentas':[gastosVentas],            
+            'gastosFinancieros':[gastosFinancieros],            
+            'gastosDepre':[gastosDespr],
+            'gastosPreop':[gastosPreop],
+            'hipotecasPagarLP':[hipotecasPagarLP],            
+            'taxes':[taxes],            
+            'inv':[inv],
+            'invest':[invest],            
+            'maqEquipo':[maqEquipo],
+            'mobAccesorios':[mobAccesorios],
+            'otrosGastos':[otrosGastos],            
+            'otrosProductos':[otrosProductos],
+            'prodFinancieros':[prodFinancieros],
+            'reservaLegal':[reservaLegal],            
+            'terryEdificios':[terryEdificios],
+            'utilyEjAnteriores':[utilyEjAnteriores],
+            'ventas':[ventas]
+                }
+            
+            new_year_df = pd.DataFrame(new_year)
+            cuentas = pd.concat([cuentas, new_year_df], ignore_index=True)
+            print(cuentas)
+# USANDO DATOS YA GUARDADOS
+    elif agregar_datos == 2:
+        console = Console()
         break
-# Se hacen los calculos de ER
-utilyBruta_y1 = ventas_y1 -  costoVentas_y1
-resIntegral_y1 = gastosFinancieros_y1 - prodFinancieros_y1
-totalGastosOpe_y1 = gastosVentas_y1 + gastosAdmon_y1 + gastosDespr_y1 + resIntegral_y1
-utilyOperativa_y1 = utilyBruta_y1 - totalGastosOpe_y1
-totalOtrosGastos_y1 = otrosGastos_y1 - otrosProductos_y1
-utilyAntesTax_y1 = utilyOperativa_y1 - totalOtrosGastos_y1
-isr_y1 = utilyAntesTax_y1 * 0.30
-ptu_y1 = utilyAntesTax_y1 * 0.10
-totalTaxPagar_y1 = isr_y1 + ptu_y1
-utilyNetaEj_y1 = utilyAntesTax_y1 - totalTaxPagar_y1
-
-# Calculos Balance General
-#   Activos             #
-totalAC_y1 = efectivo_y1 + cuentasCobrar_y1 + invest_y1 + inv_y1
-totalANC_y1 = (terryEdificios_y1 + maqEquipo_y1 + mobAccesorios_y1 + eqComputo_y1 + eqTransportes_y1) - desprAcum_y1
-otrosActivos_y1 = gastosPreop_y1
-
-totalActivos_y1 = totalAC_y1 +  totalANC_y1 + otrosActivos_y1
-#   Pasivos             #
-nwTaxes_y1 = (totalTaxPagar_y1 + taxes_y1)
-totalPC_y1 = acreedores_y1 + cuentasPagar_y1 + docxPagar_y1 + nwTaxes_y1
-
-totalPasivos_y1 = totalPC_y1 +  hipotecasPagarLP_y1
-#   Capital Contable    #
-totalCap_y1 = capitalSocial_y1 + reservaLegal_y1 + aportFuturos_y1
-utilyEjercicio_y1 = utilyEjAnteriores_y1 + utilyNetaEj_y1
-totalCC_y1 = totalCap_y1 + utilyEjercicio_y1
-
-# Generación de tablas
-
-t_er = Table(title= f"ESTADO DE RESULTADOS AÑO {y1}", show_lines=True)
-t_er.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
-t_er.add_column("1", justify="center", style="red", no_wrap=False)
-t_er.add_column("2", justify="center", style="green", no_wrap=False)
-t_er.add_column("3", justify="center", style="green", no_wrap=False)
-t_er.add_column("4", justify="center", style="green", no_wrap=False)
-
-t_er.add_row("Ventas", "", "", "", f"${ventas_y1}")
-t_er.add_row("Costo de ventas", "", "", "", f"${costoVentas_y1}")
-t_er.add_row("", "Utilidad Bruta", "", "", f"${utilyBruta_y1}")
-
-t_er.add_row("Gastos de Venta", "", "", f"${gastosVentas_y1}", "")
-t_er.add_row("Gastos de Administración", "", "", f"${gastosAdmon_y1}", "")
-t_er.add_row("Gastos por Despreciación", "", "", f"${gastosDespr_y1}", "")
-t_er.add_row("Gastos Financieros", "", f"${gastosFinancieros_y1}", "", "")
-t_er.add_row("Productos Financieros", "", f"${prodFinancieros_y1}", "", "")
-t_er.add_row("", "Resultado Integral de Financiamiento", "", f"${resIntegral_y1}", "")
-t_er.add_row("", "Total de Gastos Operativos", "", "", f"${totalGastosOpe_y1}")
-t_er.add_row("", "Utilidad Operativa", "", "", f"${utilyOperativa_y1}")
-
-t_er.add_row("Otros Gastos", "", "", f"${otrosGastos_y1}", "")
-t_er.add_row("Otros Productos", "", "", f"${otrosProductos_y1}", "")
-t_er.add_row("", "Total de Otros Gastos y Productos", "", "", f"${totalOtrosGastos_y1}")
-t_er.add_row("", "Utilidad antes de impuestos", "", "", f"${utilyAntesTax_y1}")
-
-t_er.add_row("ISR", "30%", "", f"${isr_y1}", "")
-t_er.add_row("PTU", "10%", "", f"${ptu_y1}", "")
-
-t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"${totalTaxPagar_y1}")
-t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"${utilyNetaEj_y1}")
-
-# Generación de Balance General
-t_bg = Table(title=f'BALANCE GENERAL AL {y1}', show_lines=True)
-t_bg.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
-t_bg.add_column("1", justify="center", style="red", no_wrap=False)
-t_bg.add_column("2", justify="center", style="green", no_wrap=False)
-t_bg.add_column("3", justify="center", style="green", no_wrap=False)
-t_bg.add_column("4", justify="center", style="green", no_wrap=False)
-
-t_bg.add_row("Efectivo", "", f"${efectivo_y1}", "", "")
-t_bg.add_row("Cuentas por cobrar", "", f"${cuentasCobrar_y1}", "", "")
-t_bg.add_row("Inventarios", "", f"${inv_y1}", "", "")
-t_bg.add_row("Inversiones", "", f"${invest_y1}", "", "")
-t_bg.add_row("", "TOTAL ACTIVOS CIRCULANTES", "", f"${totalAC_y1}", "")
-
-t_bg.add_row("Terreno y Edificios", "", f"${terryEdificios_y1}", "", "")
-t_bg.add_row("Maquinaria y Equipo", "", f"${maqEquipo_y1}", "", "")
-t_bg.add_row("Mobiliario y Accesorios", "", f"${mobAccesorios_y1}", "", "")
-t_bg.add_row("Equipo de Computo", "", f"${eqComputo_y1}", "", "")
-t_bg.add_row("Equipo de Transportes", "", f"${eqTransportes_y1}", "", "")
-t_bg.add_row("Despreciación acumulada de Activos Fijos", "", f"${desprAcum_y1}", "", "")
-t_bg.add_row("", "TOTAL ACTIVOS NO CIRCULANTES", "", f"${totalANC_y1}", "")
-
-t_bg.add_row("Gastos Preoperativos", "", f"${gastosPreop_y1}", "", "")
-
-t_bg.add_row("", "TOTAL ACTIVOS", "", "", f"${totalActivos_y1}")
-
-t_bg.add_row("Acreedores diversos", "", f"${acreedores_y1}", "", "")
-t_bg.add_row("Cuentas por Pagar", "", f"${cuentasPagar_y1}", "", "")
-t_bg.add_row("Documentos por Pagar", "", f"${docxPagar_y1}", "", "")
-t_bg.add_row("Impuestos", "", f"${nwTaxes_y1}", "", "")
-t_bg.add_row("", "TOTAL PASIVOS CORTO PLAZO", "", f"${totalPC_y1}", "")
-
-t_bg.add_row("Hipotécas por pagar a largo plazo", "", f"${hipotecasPagarLP_y1}", "", "")
-
-t_bg.add_row("", "TOTAL PASIVOS", "", "", f"{totalPasivos_y1}")
-
-t_bg.add_row("Capital Social", "", f"${capitalSocial_y1}", "", "")
-t_bg.add_row("Reserva Legal", "", f"${reservaLegal_y1}", "", "")
-t_bg.add_row("Aportaciones para futuros aumentos de capital", "", f"${aportFuturos_y1}", "", "")
-
-t_bg.add_row("", "TOTAL CAPITAL", "", f"{totalCap_y1}", "")
-
-t_bg.add_row("Utilidades del ejercicio anteriores", "", f"${utilyEjAnteriores_y1}", "", "")
-t_bg.add_row("Utilidad del ejercicio", "", f"${utilyNetaEj_y1}", "", "")
-
-t_bg.add_row("", "TOTAL CAPITAL CONTABLE", "", "", f"${totalCC_y1}")
-# Generación de Consola
-console = Console()
+    #cuentas = {
+    #    'acreedores':[65.00],
+    #    'aportFuturos':[535.00],
+    #    'capitalSocial':[460.00],
+    #    'costoVentas':[2610.00],
+    #    'cuentasCobrar':[629.00],
+    #    'cuentasPagar':[478.00],
+    #    'desprAcum':[2291.00],
+    #    'docxPagar':[99.00],
+    #    'efectivo':[454.00],
+    #    'eqComputo':[123.00],
+    #    'eqTransportes':[344.00],
+    #    'gastosAdmin':[243.00],
+    #    'gastosVentas':[125.00],
+    #    'gastosFinancieros':[116.00],
+    #    'gastosDepre':[299.00],
+    #    'gastosPreop':[138.00],
+    #    'hipotecasPagarLP':[1279.00],
+    #    'taxes':[134.00],
+    #    'inv':[361.00],
+    #    'invest':[85.00],
+    #    'maqEquipo':[1750.00],
+    #    'mobAccesorios':[448.00],
+    #    'otrosGastos':[44.00],
+    #    'otrosProductos':[10.00],
+    #    'prodFinancieros':[5.00],
+    #    'reservaLegal':[30.00],
+    #    'terryEdificios':[2590.00],
+    #    'utilyEjAnteriores':[1130.00],
+    #    'ventas':[3843.00]
+    #}
 
 # Menú
 while True:
-    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Salir'))
-    
+    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Liquidez\n\t4. Actividad\n\5. Salir'))
+
     if main_menu == 1:
+        year = int(input("Dame el año: \n"))
+
+        # Se hacen los calculos de ER
+        utilyBruta = cuentas.at[year,'ventas'] - cuentas.at[year,'costoVentas']
+        resIntegral = cuentas.at[year,"gastosFinancieros"] - cuentas.at[year,'prodFinancieros']
+        totalGastosOpe = cuentas.at[year,'gastosVentas'] + cuentas.at[year,'gastosAdmin'] + cuentas.at[year,'gastosDepre']
+        totalGastosOpe = totalGastosOpe + resIntegral
+
+        utilyOperativa = utilyBruta - totalGastosOpe
+        totalOtrosGastos = cuentas.at[year,'otrosGastos'] - cuentas.at[year,'otrosProductos']
+        utilyAntesTax = utilyOperativa - totalOtrosGastos
+        ISR = utilyAntesTax * 0.30
+        PTU = utilyAntesTax * 0.10
+        totalTaxPagar = ISR + PTU
+        utilyNetaEj = utilyAntesTax - totalTaxPagar
+
+        t_er = Table(title= f"ESTADO DE RESULTADOS AÑO {year}", show_lines=True)
+        t_er.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_er.add_column("1", justify="center", style="red", no_wrap=False)
+        t_er.add_column("2", justify="center", style="green", no_wrap=False)
+        t_er.add_column("3", justify="center", style="green", no_wrap=False)
+        t_er.add_column("4", justify="center", style="green", no_wrap=False)
+
+        t_er.add_row("Ventas", "", "", "", f"${cuentas.at[year,'ventas']}")
+        t_er.add_row("Costo de ventas", "", "", "", f"${cuentas.at[year,'costoVentas']}")
+        t_er.add_row("", "Utilidad Bruta", "", "", f"${utilyBruta}")
+
+        t_er.add_row("Gastos de Venta", "", "", f"${cuentas.at[year,'gastosVentas']}", "")
+        t_er.add_row("Gastos de Administración", "", "", f"${cuentas.at[year,'gastosAdmin']}", "")
+        t_er.add_row("Gastos por Despreciación", "", "", f"${cuentas.at[year,'gastosDepre']}", "")
+        t_er.add_row("Gastos Financieros", "", f"${cuentas.at[year,'gastosFinancieros']}", "", "")
+        t_er.add_row("Productos Financieros", "", f"${cuentas.at[year,'prodFinancieros']}", "", "")
+        t_er.add_row("", "Resultado Integral de Financiamiento", "", f"${resIntegral}", "")
+        t_er.add_row("", "Total de Gastos Operativos", "", "", f"${totalGastosOpe}")
+        t_er.add_row("", "Utilidad Operativa", "", "", f"${utilyOperativa}")
+
+        t_er.add_row("Otros Gastos", "", "", f"${cuentas.at[year,'otrosGastos']}", "")
+        t_er.add_row("Otros Productos", "", "", f"${cuentas.at[year,'otrosProductos']}", "")
+        t_er.add_row("", "Total de Otros Gastos y Productos", "", "", f"${totalOtrosGastos}")
+        t_er.add_row("", "Utilidad antes de impuestos", "", "", f"${utilyAntesTax}")
+
+        t_er.add_row("ISR", "30%", "", f"${ISR}", "")
+        t_er.add_row("PTU", "10%", "", f"${PTU}", "")
+
+        t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"${totalTaxPagar}")
+        t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"${utilyNetaEj}")
+
         console.print(t_er)
 
         sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
@@ -199,9 +216,75 @@ while True:
             print('\n\t\tSaliendo . . . . .')
             break
     elif main_menu == 2:
-        console.print(t_bg)
+        year = int(input("Dame el año: \n"))
+        # Calculos Balance General
+        #   Activos             #
+        totalAC = cuentas.at[year,'efectivo'] + cuentas.at[year,'cuentasCobrar'] + cuentas.at[year,'invest'] + cuentas.at[year,'inv']
+        totalANC = (cuentas.at[year,"terryEdificios"] + cuentas.at[year,'maqEquipo'] + cuentas.at[year,"mobAccesorios"] + cuentas.at[year,'eqComputo'] + cuentas.at[year,'eqTransportes']) - cuentas.at[year,'desprAcum']
+        otrosActivos = cuentas.at[year,'gastosPreop']
+        totalActivos = totalAC +  totalANC + otrosActivos
+
+        #   Pasivos             #
+        nwTaxes = (totalTaxPagar + cuentas.at[year,'taxes'])
+        totalPC = cuentas.at[year,'acreedores'] + cuentas.at[year,'cuentasPagar'] + cuentas.at[year,'docxPagar'] + nwTaxes
+        totalPasivos = totalPC +  cuentas.at[year,'hipotecasPagarLP']
+
+        #   Capital Contable    #
+        totalCap = cuentas.at[year,'capitalSocial'] + cuentas.at[year,'reservaLegal'] + cuentas.at[year,'aportFuturos']
+        utilyEjercicio = cuentas.at[year,"utilyEjAnteriores"] + utilyNetaEj
+        totalCC = totalCap + utilyEjercicio
+
+        # Generación de Balance General
+        t_bg = Table(title=f'BALANCE GENERAL AL {year}', show_lines=True)
+        t_bg.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_bg.add_column("1", justify="center", style="red", no_wrap=False)
+        t_bg.add_column("2", justify="center", style="green", no_wrap=False)
+        t_bg.add_column("3", justify="center", style="green", no_wrap=False)
+        t_bg.add_column("4", justify="center", style="green", no_wrap=False)
+
+        t_bg.add_row("Efectivo", "", f"${cuentas.at[year,'efectivo']}", "", "")
+        t_bg.add_row("Cuentas por cobrar", "", f"${cuentas.at[year,'cuentasCobrar']}", "", "")
+        t_bg.add_row("Inventarios", "", f"${cuentas.at[year,'inv']}", "", "")
+        t_bg.add_row("Inversiones", "", f"${cuentas.at[year,'invest']}", "", "")
+        t_bg.add_row("", "TOTAL ACTIVOS CIRCULANTES", "", f"${totalAC}", "")
+
+        t_bg.add_row("Terreno y Edificios", "", f"${cuentas.at[year,'terryEdificios']}", "", "")
+        t_bg.add_row("Maquinaria y Equipo", "", f"${cuentas.at[year,'maqEquipo']}", "", "")
+        t_bg.add_row("Mobiliario y Accesorios", "", f"${cuentas.at[year,'mobAccesorios']}", "", "")
+        t_bg.add_row("Equipo de Computo", "", f"${cuentas.at[year,'eqComputo']}", "", "")
+        t_bg.add_row("Equipo de Transportes", "", f"${cuentas.at[year,'eqTransportes']}", "", "")
+        t_bg.add_row("Despreciación acumulada de Activos Fijos", "", f"${cuentas.at[year,'desprAcum']}", "", "")
+        t_bg.add_row("", "TOTAL ACTIVOS NO CIRCULANTES", "", f"${totalANC}", "")
+
+        t_bg.add_row("Gastos Preoperativos", "", f"${cuentas.at[year,'gastosPreop']}", "", "")
+
+        t_bg.add_row("", "TOTAL ACTIVOS", "", "", f"${totalActivos}")
+
+        t_bg.add_row("Acreedores diversos", "", f"${cuentas.at[year,'acreedores']}", "", "")
+        t_bg.add_row("Cuentas por Pagar", "", f"${cuentas.at[year,'cuentasPagar']}", "", "")
+        t_bg.add_row("Documentos por Pagar", "", f"${cuentas.at[year,'docxPagar']}", "", "")
+        t_bg.add_row("Impuestos", "", f"${nwTaxes}", "", "")
+        t_bg.add_row("", "TOTAL PASIVOS CORTO PLAZO", "", f"${totalPC}", "")
+
+        t_bg.add_row("Hipotécas por pagar a largo plazo", "", f"${cuentas.at[year,'hipotecasPagarLP']}", "", "")
+
+        t_bg.add_row("", "TOTAL PASIVOS", "", "", f"{totalPasivos}")
+
+        t_bg.add_row("Capital Social", "", f"${cuentas.at[year,'capitalSocial']}", "", "")
+        t_bg.add_row("Reserva Legal", "", f"${cuentas.at[year,'reservaLegal']}", "", "")
+        t_bg.add_row("Aportaciones para futuros aumentos de capital", "", f"${cuentas.at[year,'aportFuturos']}", "", "")
+
+        t_bg.add_row("", "TOTAL CAPITAL", "", f"{totalCap}", "")
+
+        t_bg.add_row("Utilidades del ejercicio anteriores", "", f"${cuentas.at[year,'utilyEjAnteriores']}", "", "")
+        t_bg.add_row("Utilidad del ejercicio", "", f"${utilyNetaEj}", "", "")
+
+        t_bg.add_row("", "TOTAL CAPITAL CONTABLE", "", "", f"${totalCC}")
+
 
         sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
+
+        console.print(t_bg)
 
         if sub_op == "menú":
             continue
@@ -209,6 +292,155 @@ while True:
             print('\n\t\tSaliendo . . . . .')
             break
     elif main_menu == 3:
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        # LIQUIDEZ
+        t_liquidez = Table(title= f"LIQUIDEZ", show_lines=True)
+        t_liquidez.add_column("", justify="center", style="red", no_wrap=False)
+        t_liquidez.add_column(f"{year1}", justify="center", style="green", no_wrap=False)
+        t_liquidez.add_column(f"{year2}", justify="center", style="green", no_wrap=False)
+
+        totalAC_1 = cuentas.at[year1,'efectivo'] + cuentas.at[year1,'cuentasCobrar'] + cuentas.at[year1,'invest'] + cuentas.at[year1,'inv']
+        totalAC_2 = cuentas.at[year2,'efectivo'] + cuentas.at[year2,'cuentasCobrar'] + cuentas.at[year2,'invest'] + cuentas.at[year2,'inv']
+        
+        totalPC_1 = cuentas.at[year1,'acreedores'] + cuentas.at[year1,'cuentasPagar'] + cuentas.at[year1,'docxPagar'] + nwTaxes
+        totalPC_2 = cuentas.at[year2,'acreedores'] + cuentas.at[year2,'cuentasPagar'] + cuentas.at[year2,'docxPagar'] + nwTaxes
+
+        liquidez_1 = totalAC_1 / totalPC_1
+        liquidez_2 = totalAC_2 / totalPC_2
+
+        prueba_acida_1 = totalAC_1 - cuentas.at[year1, 'inv'] / totalPC_1
+        prueba_acida_2 = totalAC_2 - cuentas.at[year2, 'inv'] / totalPC_2
+
+        efectivo_1 = cuentas.at[year1, 'efectivo'] / totalPC_1
+        efectivo_2 = cuentas.at[year2, 'efectivo'] / totalPC_2
+
+
+        t_liquidez.add_row("Liquidez", f"${liquidez_1}", f"${liquidez_2}")
+        t_liquidez.add_row("Prueba acida",f"${prueba_acida_1}",f"${prueba_acida_2}")
+        t_liquidez.add_row("Efectivo", f"{efectivo_1}", f"${efectivo_2}")
+
+        console.print(t_liquidez)
+
+        if sub_op == "menú":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
+    
+    elif main_menu == 4:
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        # OPERACIONES DE ACTIVIDAD
+        rotacion_inv1 = cuentas.at[year1, 'costoVentas'] / cuentas.at[year1, 'inv']
+        rotacion_inv2 = cuentas.at[year2, 'costoVentas'] / cuentas.at[year2, 'inv']
+
+        rotacion_cartera1 = cuentas.at[year1, 'ventas'] / cuentas.at[year1, 'cuentasCobrar']
+        rotacion_cartera2 = cuentas.at[year2, 'ventas'] / cuentas.at[year2, 'cuentasCobrar']
+
+        rotacion_pago1 = cuentas.at[year1, 'costoVentas'] / cuentas.at[year1, 'cuentasPagar']
+        rotacion_pago2 = cuentas.at[year2, 'costoVentas'] / cuentas.at[year2, 'cuentasPagar']
+
+        totalANC1 = (cuentas.at[year1,"terryEdificios"] + cuentas.at[year1,'maqEquipo'] + cuentas.at[year1,"mobAccesorios"] + cuentas.at[year1,'eqComputo'] + cuentas.at[year1,'eqTransportes']) - cuentas.at[year1,'desprAcum']
+        totalANC2 = (cuentas.at[year2,"terryEdificios"] + cuentas.at[year2,'maqEquipo'] + cuentas.at[year2,"mobAccesorios"] + cuentas.at[year2,'eqComputo'] + cuentas.at[year2,'eqTransportes']) - cuentas.at[year2,'desprAcum']
+
+        rotacion_AF1 = cuentas.at[year1, 'ventas'] / totalANC1
+        rotacion_AF2 = cuentas.at[year2, 'ventas'] / totalANC2
+
+        totalActivos1 =  cuentas.at[year1,'efectivo'] + cuentas.at[year1,'cuentasCobrar'] + cuentas.at[year1,'invest'] + cuentas.at[year1,'inv']
+        totalActivos2 =  cuentas.at[year2,'efectivo'] + cuentas.at[year2,'cuentasCobrar'] + cuentas.at[year2,'invest'] + cuentas.at[year2,'inv']
+        
+        rotacion_AT1 = cuentas.at[year1, 'ventas'] / totalActivos1
+        rotacion_AT2 = cuentas.at[year2, 'ventas'] / totalActivos2
+
+        # CREACION DE ACTIVIDAD
+        t_actividad = Table(title= f"ACTIVIDAD", show_lines=True)
+        t_actividad.add_column("", justify="center", style="red", no_wrap=False)
+        t_actividad.add_column(f"{year1}", justify="center", style="green", no_wrap=False)
+        t_actividad.add_column(f"{year2}", justify="center", style="green", no_wrap=False)
+
+        t_actividad.add_row("Rotacion de inventarios", f"${rotacion_inv1}", f"${rotacion_inv2}")
+        t_actividad.add_row("Rotacion de cartera", f"${rotacion_cartera1}", f"${rotacion_cartera2}")
+        t_actividad.add_row("Rotacion de pago", f"${rotacion_pago1}", f"${rotacion_pago2}")
+        t_actividad.add_row("Rotacion de activo fijo", f"${rotacion_AF1}", f"${rotacion_AF2}")
+        t_actividad.add_row("Rotacion activos totales", f"${rotacion_AT1}", f"${rotacion_AT2}")
+
+        console.print(t_actividad)
+
+        if sub_op == "menú":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
+    elif main_menu == 5:
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        # CALCULO DE ER DE AMBOS AñOS
+        utilyBruta1 = cuentas.at[year1,'ventas'] - cuentas.at[year1,'costoVentas']
+        utilyBruta2 = cuentas.at[year2,'ventas'] - cuentas.at[year2,'costoVentas']
+
+        resIntegral1 = cuentas.at[year1,"gastosFinancieros"] - cuentas.at[year1,'prodFinancieros']
+        resIntegral2 = cuentas.at[year2,"gastosFinancieros"] - cuentas.at[year2,'prodFinancieros']
+
+        totalGastosOpe1 = cuentas.at[year1,'gastosVentas'] + cuentas.at[year1,'gastosAdmin'] + cuentas.at[year1,'gastosDepre']
+        totalGastosOpe2 = cuentas.at[year2,'gastosVentas'] + cuentas.at[year2,'gastosAdmin'] + cuentas.at[year2,'gastosDepre']
+
+        totalGastosOpe1 = totalGastosOpe1 + resIntegral1
+        totalGastosOpe2 = totalGastosOpe2 + resIntegral2
+
+        utilyOperativa1 = utilyBruta1 - totalGastosOpe1
+        utilyOperativa2 = utilyBruta2 - totalGastosOpe2
+
+        totalOtrosGastos1 = cuentas.at[year1,'otrosGastos'] - cuentas.at[year1,'otrosProductos']
+        totalOtrosGastos2 = cuentas.at[year2,'otrosGastos'] - cuentas.at[year2,'otrosProductos']
+
+        utilyAntesTax1 = utilyOperativa1 - totalOtrosGastos1
+        utilyAntesTax2 = utilyOperativa2 - totalOtrosGastos2
+
+        ISR1 = utilyAntesTax1 * 0.30
+        ISR2 = utilyAntesTax2 * 0.30
+        PTU1 = utilyAntesTax1 * 0.10
+        PTU2 = utilyAntesTax2 * 0.10
+
+        totalTaxPagar1 = ISR1 + PTU1
+        totalTaxPagar2 = ISR2 + PTU2
+
+        utilyNetaEj1 = utilyAntesTax1 - totalTaxPagar1
+        utilyNetaEj2 = utilyAntesTax2 - totalTaxPagar2
+
+        # OPERACIONES DE BG DE AMBOS AñOS 
+        totalAC = cuentas.at[year,'efectivo'] + cuentas.at[year,'cuentasCobrar'] + cuentas.at[year,'invest'] + cuentas.at[year,'inv']
+        
+        totalANC = (cuentas.at[year,"terryEdificios"] + cuentas.at[year,'maqEquipo'] + cuentas.at[year,"mobAccesorios"] + cuentas.at[year,'eqComputo'] + cuentas.at[year,'eqTransportes']) - cuentas.at[year,'desprAcum']
+        otrosActivos = cuentas.at[year,'gastosPreop']
+        totalActivos = totalAC +  totalANC + otrosActivos
+
+        #   Pasivos             #
+        nwTaxes = (totalTaxPagar + cuentas.at[year,'taxes'])
+        totalPC = cuentas.at[year,'acreedores'] + cuentas.at[year,'cuentasPagar'] + cuentas.at[year,'docxPagar'] + nwTaxes
+        totalPasivos = totalPC +  cuentas.at[year,'hipotecasPagarLP']
+
+        #   Capital Contable    #
+        totalCap = cuentas.at[year,'capitalSocial'] + cuentas.at[year,'reservaLegal'] + cuentas.at[year,'aportFuturos']
+        utilyEjercicio = cuentas.at[year,"utilyEjAnteriores"] + utilyNetaEj
+        totalCC = totalCap + utilyEjercicio
+
+        # OPERACIONES DE CICLO DE CONVERSION DE EFECTIVO
+
+        totalPC = cuentas.at[year,'acreedores'] + cuentas.at[year,'cuentasPagar'] + cuentas.at[year,'docxPagar'] + nwTaxes
+
+        totalAC_1 = cuentas.at[year1,'efectivo'] + cuentas.at[year1,'cuentasCobrar'] + cuentas.at[year1,'invest'] + cuentas.at[year1,'inv']
+        totalAC_2 = cuentas.at[year2,'efectivo'] + cuentas.at[year2,'cuentasCobrar'] + cuentas.at[year2,'invest'] + cuentas.at[year2,'inv']
+        
+        totalPC_1 = cuentas.at[year1,'acreedores'] + cuentas.at[year1,'cuentasPagar'] + cuentas.at[year1,'docxPagar'] + nwTaxes
+        totalPC_2 = cuentas.at[year2,'acreedores'] + cuentas.at[year2,'cuentasPagar'] + cuentas.at[year2,'docxPagar'] + nwTaxes
+
+
+
+    elif main_menu == 6:
         break
 
 #**CAPITAL DE TRABAJO**
@@ -231,39 +463,6 @@ while True:
 #print(f"Razon Circulante 2014: ${razonCirc_y1:.2f}")
 #print(f"Razon Circulante 2015: ${razonCirc_y2:.2f}")
 
-#**CICLO DE CONVERSION DE EFECTIVO**
-#**(EDITAR DESPUES, ESTO ES UN BORRADOR DEL CODIGO FINAL, SIN USAR LA ESTRUCTURA DE TABLE Y ROWS)**
-
-#Rotacion_Inventario_y1=(costoVentas_y1/inventario_y1)
-#Rotacion_Inventario_y2=(costoVentas_y2/inventario_y2)
-#Rotacion_CXC_y1=(ventas_y1/cuentasCobrar_y1)
-#Rotacion_CXC_y2=(ventas_y2/cuentasCobrar_y2)
-#Rotacion_CXP_y1=(costoVentas_y1/cuentasPagar_y1)
-#Rotacion_CXP_y2=(costoVentas_y2/cuentasPagar_y2)
-#print(f"Rotacion de Inventario Año 1: {Rotacion_Inventario_y1}")
-#print(f"Rotacion de Inventario Año 2: {Rotacion_Inventario_y2}")
-#print(f"Rotacion de CXC Año 1: {Rotacion_CXC_y1}")
-#print(f"Rotacion de CXC Año 2: {Rotacion_CXC_y2}")
-#print(f"Rotacion de CXP Año 1: {Rotacion_CXP_y1}")
-#print(f"Rotacion de CXP Año 2: {Rotacion_CXP_y2}")
-
-#Edad_Promedio_Inventario_y1=(360/Rotacion_Inventario_y1)
-#Edad_Promedio_Inventario_y2=(360/Rotacion_Inventario_y2)
-#Periodo_Promedio_Cobro_y1=(360/Rotacion_CXC_y1)
-#Periodo_Promedio_Cobro_y2=(360/Rotacion_CXC_y2)
-#Ciclo_Operativo_y1=(Edad_Promedio_Inventario_y1+Periodo_Promedio_Cobro_y1)
-#Ciclo_Operativo_y2=(Edad_Promedio_Inventario_y2+Periodo_Promedio_Cobro_y2)
-#print(f"Edad Promedio de Inventario Año 1: {Edad_Promedio_Inventario_y1}")
-#print(f"Edad Promedio de Inventario Año 2: {Edad_Promedio_Inventario_y2}")
-#print(f"Periodo Promedio de Cobro Año 1: {Periodo_Promedio_Cobro_y1}")
-#print(f"Periodo Promedio de Cobro Año 2: {Periodo_Promedio_Cobro_y2}")
-#print(f"Ciclo Operativo Año 1: {Ciclo_Operativo_y1}")
-#print(f"Ciclo Operativo Año 2: {Ciclo_Operativo_y2}")
-
-#Periodo_Promedio_Pago_y1=(360/Rotacion_CXP_y1)
-#Periodo_Promedio_Pago_y2=(360/Rotacion_CXP_y2)
-#print(f"Periodo Promedio de Pago Año 1: {Periodo_Promedio_Pago_y1}")
-#print(f"Periodo Promedio de Pago Año 2: {Periodo_Promedio_Pago_y2}")
 
 #Ciclo_Conv_Efectivo_y1=(Ciclo_Operativo_y1-Periodo_Promedio_Pago_y1)
 #Ciclo_Conv_Efectivo_y2=(Ciclo_Operativo_y2-Periodo_Promedio_Pago_y2)
