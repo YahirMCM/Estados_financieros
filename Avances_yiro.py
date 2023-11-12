@@ -37,7 +37,7 @@ cuentas = {
 
 cuentas = pd.DataFrame(cuentas)
 cuentas.set_index('year', inplace=True)
-print(cuentas)
+#print(cuentas)
 
 estado_resultados = {
             'year':[2013],
@@ -54,7 +54,7 @@ estado_resultados = {
         }
 estado_resultados = pd.DataFrame(estado_resultados)
 estado_resultados.set_index('year', inplace=True)
-print(estado_resultados)
+#print(estado_resultados)
 
 balance_general = {
             'year':[2013],
@@ -71,7 +71,7 @@ balance_general = {
         }
 balance_general = pd.DataFrame(balance_general)
 balance_general.set_index('year', inplace=True)
-print(balance_general)
+#print(balance_general)
 
 print('¡Bienvenido/a al uso de este programa de estados financieros!\nFavor de ingresar los siguientes datos requeridos:\n\n')
 # ELECCION DE SI QUIERE AñADIR DATOS O PREFIERE USAR LOS QUE YA TIENE
@@ -228,7 +228,7 @@ while True:
         nw_er_df = pd.DataFrame(new_estado_resultados)
         nw_er_df.set_index('year', inplace=True)
         estado_resultados = pd.concat([estado_resultados, nw_er_df], ignore_index=False)
-        print(estado_resultados)
+        #print(estado_resultados)
 
         t_er = Table(title= f"ESTADO DE RESULTADOS AÑO {year}", show_lines=True)
         t_er.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
@@ -263,9 +263,9 @@ while True:
 
         console.print(t_er)
 
-        sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
 
-        if sub_op == "menú":
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -307,7 +307,7 @@ while True:
         nw_bg_df = pd.DataFrame(new_balance_general)
         nw_bg_df.set_index('year', inplace=True)
         balance_general = pd.concat([balance_general, nw_bg_df], ignore_index=False)
-        print(balance_general)
+        #print(balance_general)
 
         # Generación de Balance General
         t_bg = Table(title=f'BALANCE GENERAL AL {year}', show_lines=True)
@@ -356,12 +356,11 @@ while True:
 
         t_bg.add_row("", "TOTAL CAPITAL CONTABLE", "", "", f"${totalCC}")
 
-
-        sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
-
         console.print(t_bg)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -398,7 +397,9 @@ while True:
 
         console.print(t_liquidez)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -444,7 +445,9 @@ while True:
 
         console.print(t_actividad)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -537,13 +540,20 @@ while True:
         t_razEnd.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
         t_razEnd.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
 
-        t_razEnd.add_row("Razon de Endeudamiento", f"{razon_endeudamiento1:.2f}%", f"${razon_endeudamiento2:.2f}%")
+        t_razEnd.add_row("Razon de Endeudamiento", f"{razon_endeudamiento1:.2f}%", f"{razon_endeudamiento2:.2f}%")
         t_razEnd.add_row("Razon de capital", f"{razon_capital1:.2f}%", f"{razon_capital2:.2f}%")
         t_razEnd.add_row("Razon de endeudamiento sobre capital", f"{razon_endeu_capital1:.2f}%", f"{razon_endeu_capital2:.2f}%")
         t_razEnd.add_row("Cobertura de intereses", f"{cobertura_intereses1:.2f}", f"{cobertura_intereses2:.2f}")
 
         console.print(t_razEnd)
 
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
     elif main_menu == 7:
         break
 
