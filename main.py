@@ -37,6 +37,41 @@ cuentas = {
 
 cuentas = pd.DataFrame(cuentas)
 cuentas.set_index('year', inplace=True)
+#print(cuentas)
+
+estado_resultados = {
+            'year':[2013],
+            'utilidadBruta':[100.00],
+            'resultadoIntegral':[100.00],
+            'totalGastosOp':[100.00],
+            'utilidadOperativa':[100.00],
+            'totalOtrosGastos':[100.00],
+            'utilidadAntesTax':[100.00],
+            'ISR':[100.00],
+            'PTU':[100.00],
+            'totalTaxesPagar':[100.00],
+            'utilidadNetaEjercicio':[100.00]            
+        }
+estado_resultados = pd.DataFrame(estado_resultados)
+estado_resultados.set_index('year', inplace=True)
+#print(estado_resultados)
+
+balance_general = {
+            'year':[2013],
+            'totalActivosCirculantes':[100.00],
+            'totalActivosNOcirculantes':[100.00],
+            'otrosActivos':[100.00],
+            'totalActivos':[100.00],
+            'Impuestos':[100.00],
+            'totalPasivosCirculantes':[100.00],
+            'totalPasivos':[100.00],
+            'totalCapital':[100.00],
+            'utilidadEjercicio':[100.00],
+            'totalCapitalContable':[100.00] 
+        }
+balance_general = pd.DataFrame(balance_general)
+balance_general.set_index('year', inplace=True)
+#print(balance_general)
 
 print('¡Bienvenido/a al uso de este programa de estados financieros!\nFavor de ingresar los siguientes datos requeridos:\n\n')
 # ELECCION DE SI QUIERE AñADIR DATOS O PREFIERE USAR LOS QUE YA TIENE
@@ -44,7 +79,7 @@ while True:
     print("Desea agregar datos?")
     print("1- SI")
     print("2- NO")
-    agregar_datos = int(input("Seleccione el numero para la opcion:\n"))
+    agregar_datos = int(input("Seleccione el numero para la opcion: "))
 
     if agregar_datos == 1:
         # Se solicitan los datos
@@ -156,7 +191,7 @@ while True:
 
 # Menú
 while True:
-    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Liquidez\n\t4. Actividad\n\5. Salir'))
+    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Liquidez\n\t4. Actividad\n\t5. Ciclo Conversión de efectivo\n\t6. Razones de Endeudamiento\n\t7. Razones de Rentabilidad\n\t8. Salir\n\tIngrese su opción: '))
 
     if main_menu == 1:
         year = int(input("Dame el año: \n"))
@@ -174,6 +209,26 @@ while True:
         PTU = utilyAntesTax * 0.10
         totalTaxPagar = ISR + PTU
         utilyNetaEj = utilyAntesTax - totalTaxPagar
+
+        # SE GUARDAN EN UN DATA FRAME
+        new_estado_resultados = {
+            'year':[year],
+            'utilidadBruta':[utilyBruta],
+            'resultadoIntegral':[resIntegral],
+            'totalGastosOp':[totalGastosOpe],
+            'utilidadOperativa':[utilyOperativa],
+            'totalOtrosGastos':[totalOtrosGastos],
+            'utilidadAntesTax':[utilyAntesTax],
+            'ISR':[ISR],
+            'PTU':[PTU],
+            'totalTaxesPagar':[totalTaxPagar],
+            'utilidadNetaEjercicio':[utilyNetaEj]            
+        }
+
+        nw_er_df = pd.DataFrame(new_estado_resultados)
+        nw_er_df.set_index('year', inplace=True)
+        estado_resultados = pd.concat([estado_resultados, nw_er_df], ignore_index=False)
+        #print(estado_resultados)
 
         t_er = Table(title= f"ESTADO DE RESULTADOS AÑO {year}", show_lines=True)
         t_er.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
@@ -208,9 +263,9 @@ while True:
 
         console.print(t_er)
 
-        sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
 
-        if sub_op == "menú":
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -233,6 +288,26 @@ while True:
         totalCap = cuentas.at[year,'capitalSocial'] + cuentas.at[year,'reservaLegal'] + cuentas.at[year,'aportFuturos']
         utilyEjercicio = cuentas.at[year,"utilyEjAnteriores"] + utilyNetaEj
         totalCC = totalCap + utilyEjercicio
+
+        # SE GUARDAN EN UN DATA FRAME
+        new_balance_general = {
+            'year':[year],
+            'totalActivosCirculantes':[totalAC],
+            'totalActivosNOcirculantes':[totalANC],
+            'otrosActivos':[otrosActivos],
+            'totalActivos':[totalActivos],
+            'Impuestos':[nwTaxes],
+            'totalPasivosCirculantes':[totalPC],
+            'totalPasivos':[totalPasivos],
+            'totalCapital':[totalCap],
+            'utilidadEjercicio':[utilyEjercicio],
+            'totalCapitalContable':[totalCC] 
+        }
+
+        nw_bg_df = pd.DataFrame(new_balance_general)
+        nw_bg_df.set_index('year', inplace=True)
+        balance_general = pd.concat([balance_general, nw_bg_df], ignore_index=False)
+        #print(balance_general)
 
         # Generación de Balance General
         t_bg = Table(title=f'BALANCE GENERAL AL {year}', show_lines=True)
@@ -281,12 +356,11 @@ while True:
 
         t_bg.add_row("", "TOTAL CAPITAL CONTABLE", "", "", f"${totalCC}")
 
-
-        sub_op = input('\nEscribir "menú" para mostrar el menú nuevamente, presionar enter para salir del programa')
-
         console.print(t_bg)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -323,7 +397,9 @@ while True:
 
         console.print(t_liquidez)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -369,7 +445,9 @@ while True:
 
         console.print(t_actividad)
 
-        if sub_op == "menú":
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
             continue
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
@@ -441,25 +519,90 @@ while True:
 
 
     elif main_menu == 6:
+        # RAZONES DE ENDEUDAMIENTO #
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        # CALCULOS #
+        razon_endeudamiento1 = (balance_general.at[year1,'totalPasivos'] / balance_general.at[year1,'totalActivos']) * 100
+        razon_capital1 = (balance_general.at[year1, 'totalCapitalContable'] / balance_general.at[year1, 'totalActivos']) * 100
+        razon_endeu_capital1 = (cuentas.at[year1, 'hipotecasPagarLP'] / balance_general.at[year1, 'totalCapitalContable']) * 100
+        cobertura_intereses1 = estado_resultados.at[year1, 'utilidadAntesTax'] / cuentas.at[year1, 'gastosFinancieros']
+
+        razon_endeudamiento2 = (balance_general.at[year2, 'totalPasivos'] / balance_general.at[year2, 'totalActivos']) * 100
+        razon_capital2 = (balance_general.at[year2, 'totalCapitalContable'] / balance_general.at[year2, 'totalActivos']) * 100
+        razon_endeu_capital2 = (cuentas.at[year2, 'hipotecasPagarLP'] / balance_general.at[year2, 'totalCapitalContable']) * 100
+        cobertura_intereses2 = estado_resultados.at[year2, 'utilidadAntesTax'] / cuentas.at[year2, 'gastosFinancieros']
+
+        # CREACIÓN DE TABLA
+        t_razEnd = Table(title= 'RAZONES DE ENDEUDAMIENTO', show_lines=True)
+        t_razEnd.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_razEnd.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
+        t_razEnd.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
+
+        t_razEnd.add_row("Razon de Endeudamiento", f"{razon_endeudamiento1:.2f}%", f"{razon_endeudamiento2:.2f}%")
+        t_razEnd.add_row("Razon de capital", f"{razon_capital1:.2f}%", f"{razon_capital2:.2f}%")
+        t_razEnd.add_row("Razon de endeudamiento sobre capital", f"{razon_endeu_capital1:.2f}%", f"{razon_endeu_capital2:.2f}%")
+        t_razEnd.add_row("Cobertura de intereses", f"{cobertura_intereses1:.2f}", f"{cobertura_intereses2:.2f}")
+
+        console.print(t_razEnd)
+
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
+    elif main_menu == 7:
+        # RAZONES DE RENTABILIDAD
         year1 = int(input("Dame el primer año a comparar:\n"))
         year2 = int(input("Dame el segundo año a comparar:\n"))
 
         # OPERACIONES DE RENTABILIDAD
         
-        margenUtility_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'ventas']
-        margenUtility_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'ventas']
+        margenUtility_y1 = (estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'ventas']) * 100
+        margenUtility_y2 = (estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'ventas']) * 100
         
-        margenUtilityBruta_y1 = estado_resultados.at[year1, 'utilyBruta'] / cuentas.at[year1, 'ventas']
-        margenUtilityBruta_y2 = estado_resultados.at[year2, 'utilyBruta'] / cuentas.at[year2, 'ventas']
+        margenUtilityBruta_y1 = (estado_resultados.at[year1, 'utilyBruta'] / cuentas.at[year1, 'ventas']) * 100
+        margenUtilityBruta_y2 = (estado_resultados.at[year2, 'utilyBruta'] / cuentas.at[year2, 'ventas']) * 100
         
-        margenUtilityOp_y1 = estado_resultados.at[year1, 'utilyOperativa'] / cuentas.at[year1, 'ventas']
-        margenUtilityOp_y2 = estado_resultados.at[year2, 'utilyOperativa'] / cuentas.at[year2, 'ventas']
+        margenUtilityOp_y1 = (estado_resultados.at[year1, 'utilyOperativa'] / cuentas.at[year1, 'ventas']) * 100
+        margenUtilityOp_y2 = (estado_resultados.at[year2, 'utilyOperativa'] / cuentas.at[year2, 'ventas']) * 100
         
-        RAT_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalActivos']
-        RAT_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalActivos']
+        RAT_y1 = (estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalActivos']) * 100
+        RAT_y2 = (estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalActivos']) * 100
         
-        ROE_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalCap']
-        ROE_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalCap']
+        ROE_y1 = (estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalCap']) * 100
+        ROE_y2 = (estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalCap']) * 100
         
-        RCC_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'capitalSocial']
-        RCC_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'capitalSocial']
+        RCC_y1 = (estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'capitalSocial']) * 100
+        RCC_y2 = (estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'capitalSocial']) * 100
+
+        # CREACIÓN DE TABLA
+
+        t_razRent = Table(title= 'RAZONES DE RENTABILIDAD', show_lines=True)
+        t_razRent.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_razRent.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
+        t_razRent.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
+
+        t_razRent.add_row("Margen de Utilidad", f"{margenUtility_y1:.2f}%", f"{margenUtility_y2:.2f}%")
+        t_razRent.add_row("Margen de Utilidad Bruta", f"{margenUtilityBruta_y1:.2f}%", f"{margenUtilityBruta_y2:.2f}%")
+        t_razRent.add_row("Margen de Utilidad Operativa", f"{margenUtilityOp_y1:.2f}%", f"{margenUtilityOp_y2:.2f}%")
+        t_razRent.add_row("Rendimiento sobre los Activos Totales", f"{RAT_y1:.2f}", f"{RAT_y2:.2f}")
+        t_razRent.add_row("Rendimiento sobre el Patrimonio", f"{ROE_y1:.2f}", f"{ROE_y2:.2f}")
+        t_razRent.add_row("Rendimiento sobre el Capital Comun", f"{RCC_y1:.2f}", f"{RCC_y2:.2f}")
+
+        console.print(t_razRent)
+
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
+
+    elif main_menu == 8:
+        break
+    
