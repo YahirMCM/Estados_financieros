@@ -441,30 +441,25 @@ while True:
 
 
     elif main_menu == 6:
-        break
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
 
-#**CAPITAL DE TRABAJO**
-#**(EDITAR DESPUES, ESTO ES UN BORRADOR DEL CODIGO FINAL, SIN USAR LA ESTRUCTURA DE TABLE Y ROWS)**
-
-#print(f"Activo Circulante 2014: ${totalAC_y1}")
-#print(f"Activo Circulante 2015: ${totalAC_y2}")
-#print("")
-#print(f"Pasivo Corto Plazo 2014: ${totalPC_y1}")
-#print(f"Pasivo Corto Plazo 2015: ${totalPC_y2}")
-#print("")
-#capTN_y1 = (totalAC_y1 - totalPC_y1)
-#capTN_y2 = (totalAC_y2 - totalPC_y2)
-#print(f"Capital de Trabajo Neto 2014: {capTN_y1}")
-#print(f"Capital de Trabajo Neto 2015: {capTN_y2}")
-#print("")
-#razonCirc_y1 = (totalAC_y1 / totalPC_y1)
-#razonCirc_y2 = (totalAC_y2 / totalPC_y2)
-#print("")
-#print(f"Razon Circulante 2014: ${razonCirc_y1:.2f}")
-#print(f"Razon Circulante 2015: ${razonCirc_y2:.2f}")
-
-
-#Ciclo_Conv_Efectivo_y1=(Ciclo_Operativo_y1-Periodo_Promedio_Pago_y1)
-#Ciclo_Conv_Efectivo_y2=(Ciclo_Operativo_y2-Periodo_Promedio_Pago_y2)
-#print(f"Ciclo de Conversion de Efectivo Año 1: {Ciclo_Conv_Efectivo_y1}")
-#print(f"Ciclo de Conversion de Efectivo Año 2: {Ciclo_Conv_Efectivo_y2}")
+        # OPERACIONES DE RENTABILIDAD
+        
+        margenUtility_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'ventas']
+        margenUtility_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'ventas']
+        
+        margenUtilityBruta_y1 = estado_resultados.at[year1, 'utilyBruta'] / cuentas.at[year1, 'ventas']
+        margenUtilityBruta_y2 = estado_resultados.at[year2, 'utilyBruta'] / cuentas.at[year2, 'ventas']
+        
+        margenUtilityOp_y1 = estado_resultados.at[year1, 'utilyOperativa'] / cuentas.at[year1, 'ventas']
+        margenUtilityOp_y2 = estado_resultados.at[year2, 'utilyOperativa'] / cuentas.at[year2, 'ventas']
+        
+        RAT_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalActivos']
+        RAT_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalActivos']
+        
+        ROE_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / balance_general.at[year1, 'totalCap']
+        ROE_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / balance_general.at[year2, 'totalCap']
+        
+        RCC_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'capitalSocial']
+        RCC_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'capitalSocial']
