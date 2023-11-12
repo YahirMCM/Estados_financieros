@@ -463,3 +463,4 @@ while True:
         
         RCC_y1 = estado_resultados.at[year1, 'utilyNetaEj'] / cuentas.at[year1, 'capitalSocial']
         RCC_y2 = estado_resultados.at[year2, 'utilyNetaEj'] / cuentas.at[year2, 'capitalSocial']
+
