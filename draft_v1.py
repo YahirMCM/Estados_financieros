@@ -160,7 +160,7 @@ while True:
 
 # Menú
 while True:
-    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Liquidez\n\t4. Actividad\n\t5. Ciclo Conversión de efectivo\n\t6. Razones de Endeudamiento\n\t7. Razones de Rentabilidad\n\t8. Salir\n\tIngrese su opción: '))
+    main_menu = int(input('\n¿Qué desea ver?\n\t1. Estado de Resultados\n\t2. Balance General\n\t3. Liquidez\n\t4. Actividad\n\t5. Ciclo Conversión de efectivo\n\t6. Razones de Endeudamiento\n\t7. Razones de Rentabilidad\n\t8. Productividad\n\t9. Valor de mercado\n\t10. Salir\n\tIngrese su opción: '))
 
     if main_menu == 1:
         year = int(input("Dame el año: \n"))
@@ -564,8 +564,61 @@ while True:
             print('\n\t\tSaliendo . . . . .')
             break
     elif main_menu == 8:
-        print("hola")
-        
+        # PRODUCTIVIDAD
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        rotacion_AF1 = cuentas.at[year1, 'ventas'] / totalANC1
+        rotacion_AF2 = cuentas.at[year2, 'ventas'] / totalANC2
+
+        rotacion_AT1 = cuentas.at[year1, 'ventas'] / totalActivos1
+        rotacion_AT2 = cuentas.at[year2, 'ventas'] / totalActivos2
+
+        t_prod = Table(title= 'PRODUCTIVIDAD', show_lines=True)
+        t_prod.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_prod.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
+        t_prod.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
+
+        t_prod.add_row("Rotacion de activo fijo", f"${rotacion_AF1:.2f}", f"${rotacion_AF2:.2f}")
+        t_prod.add_row("Rotacion activos totales", f"${rotacion_AT1:.2f}", f"${rotacion_AT2:.2f}")
+
+        console.print(t_prod)
+
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+
+        if sub_op == "m":
+            continue
+        elif sub_op == "":
+            print('\n\t\tSaliendo . . . . .')
+            break
+
     elif main_menu == 9:
+        year1 = int(input("Dame el primer año a comparar:\n"))
+        year2 = int(input("Dame el segundo año a comparar:\n"))
+
+        v_accion = int(input("Dame el valor de una accion:\n"))
+        cant_acciones = int(input("Dame la cantidad de acciones en circulacion:\n"))
+
+        utilidad_accion1 = new_estado_resultados.at[year1,'utilidadNetaEjercicio'] / cant_acciones
+        utilidad_accion2 = new_estado_resultados.at[year2,'utilidadNetaEjercicio'] / cant_acciones
+
+        valor_nominal_accion1 = cuentas.at[year1, 'capitalSocial'] / cant_acciones
+        valor_nominal_accion2 = cuentas.at[year2, 'capitalSocial'] / cant_acciones
+        
+        valor_libros_accion1 = new_balance_general.at[year1, 'totalCapitalContable'] / cant_acciones
+        valor_libros_accion2 = new_balance_general.at[year2, 'totalCapitalContable'] / cant_acciones
+
+        t_prod = Table(title= 'VALOR DE MERCADO', show_lines=True)
+        t_prod.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_prod.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
+        t_prod.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
+
+        t_prod.add_row("Valor de accion", f"${v_accion:.2f}", f"${v_accion:.2f}")
+        t_prod.add_row("Cantidad de acciones en mercado", f"${cant_acciones:.2f}", f"${cant_acciones:.2f}")
+        t_prod.add_row("Utilidad de accion", f"${utilidad_accion1:.2f}", f"${utilidad_accion2:.2f}")
+        t_prod.add_row("Valor nominal de accion", f"${valor_nominal_accion1:.2f}", f"${valor_nominal_accion2:.2f}")
+        t_prod.add_row("Valor en libros de accion", f"${valor_libros_accion1:.2f}", f"${valor_libros_accion2:.2f}")
+
+    elif main_menu == 10:
         console.print('Saliendo . . .', style="bright_cyan")
         break
