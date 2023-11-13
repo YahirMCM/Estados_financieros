@@ -7,8 +7,8 @@ Aclaraciones:
 2. El archivo "main.py" es un borrador previo donde teníamos una solución alternativa, al final, por temas de tiempo decidimos dejarla y continuar con la segura.
 
 Creado y desarrollado por:
-Yahir Caballero
-Brandon Capistran
-Martín Amézquita
-Miguel Rios
-Elías Garza
+- Yahir Caballero
+- Brandon Capistran
+- Martín Amézquita
+- Miguel Rios
+- Elías Garza
