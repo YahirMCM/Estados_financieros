@@ -457,68 +457,51 @@ while True:
         year1 = int(input("Dame el primer año a comparar:\n"))
         year2 = int(input("Dame el segundo año a comparar:\n"))
 
-        # CALCULO DE ER DE AMBOS AñOS
-        utilyBruta1 = cuentas.at[year1,'ventas'] - cuentas.at[year1,'costoVentas']
-        utilyBruta2 = cuentas.at[year2,'ventas'] - cuentas.at[year2,'costoVentas']
+        # CALCULO DEL CAPITAL DE TRABAJO
+        Cap_de_trabajo1 = totalAC_1 - totalPC_1
+        Cap_de_trabajo2 = totalAC_2 - totalPC_2
 
-        resIntegral1 = cuentas.at[year1,"gastosFinancieros"] - cuentas.at[year1,'prodFinancieros']
-        resIntegral2 = cuentas.at[year2,"gastosFinancieros"] - cuentas.at[year2,'prodFinancieros']
+        # CALCULO DE Edad promedio de inventarios
+        Edad_prom_int1 = 360 / rotacion_inv1
+        Edad_prom_int2 = 360 / rotacion_inv2
 
-        totalGastosOpe1 = cuentas.at[year1,'gastosVentas'] + cuentas.at[year1,'gastosAdmin'] + cuentas.at[year1,'gastosDepre']
-        totalGastosOpe2 = cuentas.at[year2,'gastosVentas'] + cuentas.at[year2,'gastosAdmin'] + cuentas.at[year2,'gastosDepre']
+        # CALCULO DE Periodo promedio de cobro
+        Periodo_prom_cobro1 = 360 / rotacion_cartera1
+        Periodo_prom_cobro2 = 360 / rotacion_cartera2
 
-        totalGastosOpe1 = totalGastosOpe1 + resIntegral1
-        totalGastosOpe2 = totalGastosOpe2 + resIntegral2
+        # CALCULO DE Periodo promedio de pago
+        Periodo_prom_pago1 = 360 / rotacion_pago1
+        Periodo_prom_pago2 = 360 / rotacion_pago2
 
-        utilyOperativa1 = utilyBruta1 - totalGastosOpe1
-        utilyOperativa2 = utilyBruta2 - totalGastosOpe2
-
-        totalOtrosGastos1 = cuentas.at[year1,'otrosGastos'] - cuentas.at[year1,'otrosProductos']
-        totalOtrosGastos2 = cuentas.at[year2,'otrosGastos'] - cuentas.at[year2,'otrosProductos']
-
-        utilyAntesTax1 = utilyOperativa1 - totalOtrosGastos1
-        utilyAntesTax2 = utilyOperativa2 - totalOtrosGastos2
-
-        ISR1 = utilyAntesTax1 * 0.30
-        ISR2 = utilyAntesTax2 * 0.30
-        PTU1 = utilyAntesTax1 * 0.10
-        PTU2 = utilyAntesTax2 * 0.10
-
-        totalTaxPagar1 = ISR1 + PTU1
-        totalTaxPagar2 = ISR2 + PTU2
-
-        utilyNetaEj1 = utilyAntesTax1 - totalTaxPagar1
-        utilyNetaEj2 = utilyAntesTax2 - totalTaxPagar2
-
-        # OPERACIONES DE BG DE AMBOS AñOS 
-        totalAC = cuentas.at[year,'efectivo'] + cuentas.at[year,'cuentasCobrar'] + cuentas.at[year,'invest'] + cuentas.at[year,'inv']
-        
-        totalANC = (cuentas.at[year,"terryEdificios"] + cuentas.at[year,'maqEquipo'] + cuentas.at[year,"mobAccesorios"] + cuentas.at[year,'eqComputo'] + cuentas.at[year,'eqTransportes']) - cuentas.at[year,'desprAcum']
-        otrosActivos = cuentas.at[year,'gastosPreop']
-        totalActivos = totalAC +  totalANC + otrosActivos
-
-        #   Pasivos             #
-        nwTaxes = (totalTaxPagar + cuentas.at[year,'taxes'])
-        totalPC = cuentas.at[year,'acreedores'] + cuentas.at[year,'cuentasPagar'] + cuentas.at[year,'docxPagar'] + nwTaxes
-        totalPasivos = totalPC +  cuentas.at[year,'hipotecasPagarLP']
-
-        #   Capital Contable    #
-        totalCap = cuentas.at[year,'capitalSocial'] + cuentas.at[year,'reservaLegal'] + cuentas.at[year,'aportFuturos']
-        utilyEjercicio = cuentas.at[year,"utilyEjAnteriores"] + utilyNetaEj
-        totalCC = totalCap + utilyEjercicio
+        # CALCULO DE Ciclo Operativo
+        Ciclo_operativo1 = Edad_prom_int1 + Periodo_prom_cobro1
+        Ciclo_operativo2 = Edad_prom_int2 + Periodo_prom_cobro2
 
         # OPERACIONES DE CICLO DE CONVERSION DE EFECTIVO
+        Ciclo_conv_cash1 = Ciclo_operativo1 - Periodo_prom_pago1
+        Ciclo_conv_cash2 = Ciclo_operativo2 - Periodo_prom_pago2
 
-        totalPC = cuentas.at[year,'acreedores'] + cuentas.at[year,'cuentasPagar'] + cuentas.at[year,'docxPagar'] + nwTaxes
+     # CREACIÓN DE TABLA
+        t_razEnd = Table(title= 'CICLO DE CONVERSION DE EFECTIVO', show_lines=True)
+        t_razEnd.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
+        t_razEnd.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
+        t_razEnd.add_column(f"{year2}", justify="center", style="yellow", no_wrap=False)
 
-        totalAC_1 = cuentas.at[year1,'efectivo'] + cuentas.at[year1,'cuentasCobrar'] + cuentas.at[year1,'invest'] + cuentas.at[year1,'inv']
-        totalAC_2 = cuentas.at[year2,'efectivo'] + cuentas.at[year2,'cuentasCobrar'] + cuentas.at[year2,'invest'] + cuentas.at[year2,'inv']
-        
-        totalPC_1 = cuentas.at[year1,'acreedores'] + cuentas.at[year1,'cuentasPagar'] + cuentas.at[year1,'docxPagar'] + nwTaxes
-        totalPC_2 = cuentas.at[year2,'acreedores'] + cuentas.at[year2,'cuentasPagar'] + cuentas.at[year2,'docxPagar'] + nwTaxes
+        t_razEnd.add_row("Capital de Trabajo", f"{Cap_de_trabajo1:.2f}", f"{Cap_de_trabajo2:.2f}")
+        t_razEnd.add_row("Edad promedio de inventarios", f"{Edad_prom_int1:.2f} dias " , f"{Edad_prom_int2:.2f} dias ")
+        t_razEnd.add_row("Periodo promedio de cobro", f"{Periodo_prom_cobro1:.2f}", f"{Periodo_prom_cobro2:.2f}")
+        t_razEnd.add_row("Periodo promedio de pago", f"{Periodo_prom_pago1:.2f}", f"{Periodo_prom_pago2:.2f}")
+        t_razEnd.add_row("Ciclo Operativo", f"{Ciclo_operativo1:.2f}", f"{Ciclo_operativo2:.2f}")
+        t_razEnd.add_row("Ciclo de Conversion de efectivo", f"{Ciclo_conv_cash1:.2f}", f"{Ciclo_conv_cash2:.2f}")
 
+        console.print(t_razEnd)
 
-
+        sub_op = input('\nEscribir "m" para mostrar el menú nuevamente, presionar enter para salir del programa ').lower()
+        if sub_op == "m":
+              continue
+        elif sub_op == "":
+              print('\n\t\tSaliendo . . . . .')
+              break
     elif main_menu == 6:
         # RAZONES DE ENDEUDAMIENTO #
         year1 = int(input("Dame el primer año a comparar:\n"))
