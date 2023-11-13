@@ -463,14 +463,20 @@ while True:
         Cap_de_trabajo2 = balance_general.at[year2, 'totalActivosCirculantes'] - balance_general.at[year2, 'totalPasivosCirculantes']
 
         # CALCULO DE Edad promedio de inventarios
+        rotacion_inv1 = cuentas.at[year1, 'costoVentas'] / cuentas.at[year1, 'inv']
+        rotacion_inv2 = cuentas.at[year2, 'costoVentas'] / cuentas.at[year2, 'inv']
         Edad_prom_int1 = 360 / rotacion_inv1
         Edad_prom_int2 = 360 / rotacion_inv2
 
         # CALCULO DE Periodo promedio de cobro
+        rotacion_cartera1 = cuentas.at[year1, 'ventas'] / cuentas.at[year1, 'cuentasCobrar']
+        rotacion_cartera2 = cuentas.at[year2, 'ventas'] / cuentas.at[year2, 'cuentasCobrar']
         Periodo_prom_cobro1 = 360 / rotacion_cartera1
         Periodo_prom_cobro2 = 360 / rotacion_cartera2
 
         # CALCULO DE Periodo promedio de pago
+        rotacion_pago1 = cuentas.at[year1, 'costoVentas'] / cuentas.at[year1, 'cuentasPagar']
+        rotacion_pago2 = cuentas.at[year2, 'costoVentas'] / cuentas.at[year2, 'cuentasPagar']
         Periodo_prom_pago1 = 360 / rotacion_pago1
         Periodo_prom_pago2 = 360 / rotacion_pago2
 
@@ -482,7 +488,7 @@ while True:
         Ciclo_conv_cash1 = Ciclo_operativo1 - Periodo_prom_pago1
         Ciclo_conv_cash2 = Ciclo_operativo2 - Periodo_prom_pago2
 
-     # CREACIÓN DE TABLA
+         # CREACIÓN DE TABLA
         t_cce = Table(title= 'CICLO DE CONVERSION DE EFECTIVO', show_lines=True)
         t_cce.add_column("CONCEPTO", justify="center", style="cyan", no_wrap=False)
         t_cce.add_column(f"{year1}", justify="center", style="yellow", no_wrap=False)
@@ -490,8 +496,8 @@ while True:
 
         t_cce.add_row("Capital de Trabajo", f"{Cap_de_trabajo1:.2f}", f"{Cap_de_trabajo2:.2f}")
         t_cce.add_row("Edad promedio de inventarios", f"{Edad_prom_int1:.2f} dias " , f"{Edad_prom_int2:.2f} dias ")
-        t_cce.add_row("Periodo promedio de cobro", f"{Periodo_prom_cobro1:.2f}", f"{Periodo_prom_cobro2:.2f}")
-        t_cce.add_row("Periodo promedio de pago", f"{Periodo_prom_pago1:.2f}", f"{Periodo_prom_pago2:.2f}")
+        t_cce.add_row("Periodo promedio de cobro", f"{Periodo_prom_cobro1:.2f} dias ", f"{Periodo_prom_cobro2:.2f} dias ")
+        t_cce.add_row("Periodo promedio de pago", f"{Periodo_prom_pago1:.2f} dias ", f"{Periodo_prom_pago2:.2f} dias ")
         t_cce.add_row("Ciclo Operativo", f"{Ciclo_operativo1:.2f}", f"{Ciclo_operativo2:.2f}")
         t_cce.add_row("Ciclo de Conversion de efectivo", f"{Ciclo_conv_cash1:.2f}", f"{Ciclo_conv_cash2:.2f}")
 
