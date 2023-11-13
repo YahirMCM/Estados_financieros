@@ -1,3 +1,4 @@
+
 from rich.table import Table
 from rich.console import Console
 import pandas as pd
