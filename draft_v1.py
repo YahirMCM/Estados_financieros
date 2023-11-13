@@ -157,37 +157,6 @@ while True:
     elif agregar_datos == 2:
         console = Console()
         break
-    #cuentas = {
-    #    'acreedores':[65.00],
-    #    'aportFuturos':[535.00],
-    #    'capitalSocial':[460.00],
-    #    'costoVentas':[2610.00],
-    #    'cuentasCobrar':[629.00],
-    #    'cuentasPagar':[478.00],
-    #    'desprAcum':[2291.00],
-    #    'docxPagar':[99.00],
-    #    'efectivo':[454.00],
-    #    'eqComputo':[123.00],
-    #    'eqTransportes':[344.00],
-    #    'gastosAdmin':[243.00],
-    #    'gastosVentas':[125.00],
-    #    'gastosFinancieros':[116.00],
-    #    'gastosDepre':[299.00],
-    #    'gastosPreop':[138.00],
-    #    'hipotecasPagarLP':[1279.00],
-    #    'taxes':[134.00],
-    #    'inv':[361.00],
-    #    'invest':[85.00],
-    #    'maqEquipo':[1750.00],
-    #    'mobAccesorios':[448.00],
-    #    'otrosGastos':[44.00],
-    #    'otrosProductos':[10.00],
-    #    'prodFinancieros':[5.00],
-    #    'reservaLegal':[30.00],
-    #    'terryEdificios':[2590.00],
-    #    'utilyEjAnteriores':[1130.00],
-    #    'ventas':[3843.00]
-    #}
 
 # Menú
 while True:
@@ -256,10 +225,10 @@ while True:
         t_er.add_row("", "Utilidad antes de impuestos", "", "", f"${utilyAntesTax}")
 
         t_er.add_row("ISR", "30%", "", f"${ISR}", "")
-        t_er.add_row("PTU", "10%", "", f"${PTU}", "")
+        t_er.add_row("PTU", "10%", "", f"${PTU:.2f}", "")
 
-        t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"${totalTaxPagar}")
-        t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"${utilyNetaEj}")
+        t_er.add_row("", "Total de Impuestos por Pagar", "", "", f"${totalTaxPagar:.2f}")
+        t_er.add_row("", "Utilidad NETA del ejercicio", "", "", f"${utilyNetaEj:.2f}")
 
         console.print(t_er)
 
@@ -338,7 +307,7 @@ while True:
         t_bg.add_row("Acreedores diversos", "", f"${cuentas.at[year,'acreedores']}", "", "")
         t_bg.add_row("Cuentas por Pagar", "", f"${cuentas.at[year,'cuentasPagar']}", "", "")
         t_bg.add_row("Documentos por Pagar", "", f"${cuentas.at[year,'docxPagar']}", "", "")
-        t_bg.add_row("Impuestos", "", f"${nwTaxes}", "", "")
+        t_bg.add_row("Impuestos", "", f"${nwTaxes:.2f}", "", "")
         t_bg.add_row("", "TOTAL PASIVOS CORTO PLAZO", "", f"${totalPC}", "")
 
         t_bg.add_row("Hipotécas por pagar a largo plazo", "", f"${cuentas.at[year,'hipotecasPagarLP']}", "", "")
@@ -352,7 +321,7 @@ while True:
         t_bg.add_row("", "TOTAL CAPITAL", "", f"{totalCap}", "")
 
         t_bg.add_row("Utilidades del ejercicio anteriores", "", f"${cuentas.at[year,'utilyEjAnteriores']}", "", "")
-        t_bg.add_row("Utilidad del ejercicio", "", f"${utilyNetaEj}", "", "")
+        t_bg.add_row("Utilidad del ejercicio", "", f"${utilyNetaEj:.2f}", "", "")
 
         t_bg.add_row("", "TOTAL CAPITAL CONTABLE", "", "", f"${totalCC}")
 
@@ -393,9 +362,9 @@ while True:
         efectivo_2 = cuentas.at[year2, 'efectivo'] / totalPC_2
 
 
-        t_liquidez.add_row("Liquidez", f"${liquidez_1}", f"${liquidez_2}")
-        t_liquidez.add_row("Prueba acida",f"${prueba_acida_1}",f"${prueba_acida_2}")
-        t_liquidez.add_row("Efectivo", f"{efectivo_1}", f"${efectivo_2}")
+        t_liquidez.add_row("Liquidez", f"{liquidez_1:.2f}", f"{liquidez_2:.2f}")
+        t_liquidez.add_row("Prueba acida",f"{prueba_acida_1:.2f}",f"{prueba_acida_2:.2f}")
+        t_liquidez.add_row("Efectivo", f"${efectivo_1:.2f}", f"${efectivo_2:.2f}")
 
         console.print(t_liquidez)
 
@@ -439,11 +408,11 @@ while True:
         t_actividad.add_column(f"{year1}", justify="center", style="green", no_wrap=False)
         t_actividad.add_column(f"{year2}", justify="center", style="green", no_wrap=False)
 
-        t_actividad.add_row("Rotacion de inventarios", f"${rotacion_inv1}", f"${rotacion_inv2}")
-        t_actividad.add_row("Rotacion de cartera", f"${rotacion_cartera1}", f"${rotacion_cartera2}")
-        t_actividad.add_row("Rotacion de pago", f"${rotacion_pago1}", f"${rotacion_pago2}")
-        t_actividad.add_row("Rotacion de activo fijo", f"${rotacion_AF1}", f"${rotacion_AF2}")
-        t_actividad.add_row("Rotacion activos totales", f"${rotacion_AT1}", f"${rotacion_AT2}")
+        t_actividad.add_row("Rotacion de inventarios", f"${rotacion_inv1:.2f}", f"${rotacion_inv2:.2f}")
+        t_actividad.add_row("Rotacion de cartera", f"${rotacion_cartera1:.2f}", f"${rotacion_cartera2:.2f}")
+        t_actividad.add_row("Rotacion de pago", f"${rotacion_pago1:.2f}", f"${rotacion_pago2:.2f}")
+        t_actividad.add_row("Rotacion de activo fijo", f"${rotacion_AF1:.2f}", f"${rotacion_AF2:.2f}")
+        t_actividad.add_row("Rotacion activos totales", f"${rotacion_AT1:.2f}", f"${rotacion_AT2:.2f}")
 
         console.print(t_actividad)
 
@@ -594,32 +563,9 @@ while True:
         elif sub_op == "":
             print('\n\t\tSaliendo . . . . .')
             break
-
     elif main_menu == 8:
+        print("hola")
+        
+    elif main_menu == 9:
+        console.print('Saliendo . . .', style="bright_cyan")
         break
-
-#**CAPITAL DE TRABAJO**
-#**(EDITAR DESPUES, ESTO ES UN BORRADOR DEL CODIGO FINAL, SIN USAR LA ESTRUCTURA DE TABLE Y ROWS)**
-
-#print(f"Activo Circulante 2014: ${totalAC_y1}")
-#print(f"Activo Circulante 2015: ${totalAC_y2}")
-#print("")
-#print(f"Pasivo Corto Plazo 2014: ${totalPC_y1}")
-#print(f"Pasivo Corto Plazo 2015: ${totalPC_y2}")
-#print("")
-#capTN_y1 = (totalAC_y1 - totalPC_y1)
-#capTN_y2 = (totalAC_y2 - totalPC_y2)
-#print(f"Capital de Trabajo Neto 2014: {capTN_y1}")
-#print(f"Capital de Trabajo Neto 2015: {capTN_y2}")
-#print("")
-#razonCirc_y1 = (totalAC_y1 / totalPC_y1)
-#razonCirc_y2 = (totalAC_y2 / totalPC_y2)
-#print("")
-#print(f"Razon Circulante 2014: ${razonCirc_y1:.2f}")
-#print(f"Razon Circulante 2015: ${razonCirc_y2:.2f}")
-
-
-#Ciclo_Conv_Efectivo_y1=(Ciclo_Operativo_y1-Periodo_Promedio_Pago_y1)
-#Ciclo_Conv_Efectivo_y2=(Ciclo_Operativo_y2-Periodo_Promedio_Pago_y2)
-#print(f"Ciclo de Conversion de Efectivo Año 1: {Ciclo_Conv_Efectivo_y1}")
-#print(f"Ciclo de Conversion de Efectivo Año 2: {Ciclo_Conv_Efectivo_y2}")
